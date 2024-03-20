@@ -1,0 +1,69 @@
+esphome:
+  name: cullAssistant 
+  friendly_name: cullAssistant 
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+api:
+ 
+ota:
+
+mdns:
+  disabled: false
+
+wifi:
+  ap: {} # This spawns an AP with the device name and mac address with no password.
+
+captive_portal:
+
+web_server:
+  port: 80
+
+external_components:
+  - source:
+      type: local
+      path: ./esphome_components/components
+    components: [ serial_csv ]
+
+
+uart:
+ - id: uart_1
+   tx_pin: 17
+   rx_pin: 16
+   baud_rate: 9600
+   data_bits: 8
+   parity: "NONE"
+   stop_bits: 1
+
+    
+sensor:
+  - platform: serial_csv
+    uart_id: uart_1
+    sensors:
+      - index: 1
+        name: Gallons
+        unit_of_measurement: "gal"
+        icon: "mdi:water"
+        device_class: "water"
+        state_class: "total_increasing"
+      - index: 2
+        name: Gallons Per Minute
+        unit_of_measurement: "gal/min"
+        icon: "mdi:water"
+        device_class: "volume_flow_rate"
+        state_class: "measurement"
+        accuracy_decimals: 2
+      - index: 3
+        name: State
+      - index: 4
+        name: Gallons to Recharge
+        unit_of_measurement: "gal"
+        icon: "mdi:water"
+        device_class: "water"
+        state_class: "measurement"
