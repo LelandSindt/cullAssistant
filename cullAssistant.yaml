@@ -27,8 +27,8 @@ web_server:
 
 external_components:
   - source:
-      type: local
-      path: ./esphome_components/components
+      type: git
+      url: https://github.com/ssieb/esphome_components
     components: [ serial_csv ]
 
 
