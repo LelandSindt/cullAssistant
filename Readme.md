@@ -18,7 +18,7 @@ I was able to find 5v from the JTAG port, I can't say that I recommend this as i
 
 <img src='./images/board1.jpg' width='500'>
 
-
+You will need to edit [cullAssistant.yaml](./cullAssistant.yaml) to ensure proper board and tx/rx pin configuration. 
 
 ## Thank you
 Thank you to the Home Assistant and esphome developers, a specific thank you to [Samuel Sieb](https://github.com/ssieb/) for the `serial_csv` component and the help in [discord](https://discord.gg/esphome)
