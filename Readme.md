@@ -2,6 +2,15 @@
 # cullAssistant
 An esphome configuration that receives messages via serial from Culligan water softeners and sends `Gallons` (gal), `Gallons Per Minute` (gal/min), and `Gallons to Recharge` (gal) to Home Assistant. `Gallons` can be used as a `Water Source` in the `Energy Dashboard`
 
+## Notes
+So far, this project is very much a "works for me" project. However, I want this to be accessible to others. If you have questions open a ticket, I will do what I can to help. If you can make improvements, open a Pull Request.  
+
+Culligan water softeners are expensive, please consider the risks to your equipment you are taking when implementing this project. I can't speak to how it would effect your warranty or how your "Culligan Man" is going to react when they find and ESP32 wired in...  
+
+Please consider the risk to your ESP32 when implementing this project. The TTL UART on the Culligan controller is 5v, so far my 3.3v ESP32 is working just fine. There are some references on reddit to the boards being 3.3v tolerant, but Adafruit makes it very clear that their boards are NOT 3.3v tolerant.  
+
+During the sort time I have been running this I have found that some water users in my house do not register usage. So far my dishwasher does not show up, running overnight I see no usage. My theory is that it does not draw enough volume (gal/min) for the Culligan to notice. Showers, Toilets, Faucets all show water usage. I have yet to test accuracy.  
+
 Using this [manual](https://adms.fnal.gov/vacuum/manuals/diwater/Manuals/1b.%20GBE%20Industrial%20Communications%20(RS232%20RS485%20Modbud%20Profybus)%2001021512_C_w.pdf) I was able to determine that (some?) Culligan water softeners have a debug port that send a simple water usage message every ~60 seconds. 
 
 ```
