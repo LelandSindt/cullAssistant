@@ -5,7 +5,7 @@ An esphome configuration that receives messages via serial from Culligan water s
 ## Notes
 So far, this project is very much a "works for me" project. However, I want this to be accessible to others. If you have questions open a ticket, I will do what I can to help. If you can make improvements, open a Pull Request.  
 
-Culligan water softeners are expensive, please consider the risks to your equipment you are taking when implementing this project. I can't speak to how it would effect your warranty or how your "Culligan Man" is going to react when they find and ESP32 wired in...  
+Culligan water softeners are expensive, please consider the risks to your equipment you are taking when implementing this project. I can't speak to how it would effect your warranty or how your "Culligan Man" is going to react when they find an ESP32 wired in...  
 
 Please consider the risk to your ESP32 when implementing this project. The TTL UART on the Culligan controller is 5v, so far my 3.3v ESP32 is working just fine. There are some references on reddit to the boards being 3.3v tolerant, but Adafruit makes it very clear that their boards are NOT 3.3v tolerant.  
 
