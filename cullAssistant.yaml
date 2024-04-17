@@ -29,6 +29,7 @@ external_components:
   - source:
       type: git
       url: https://github.com/ssieb/esphome_components
+      ref: b922726dae9cbb0e7945446610ca7aab808559f2
     components: [ serial_csv ]
 
 
