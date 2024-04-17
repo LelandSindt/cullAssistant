@@ -1,5 +1,5 @@
 esphome:
-  name: cullAssistant 
+  name: cullassistant
   friendly_name: cullAssistant 
 
 esp32:
