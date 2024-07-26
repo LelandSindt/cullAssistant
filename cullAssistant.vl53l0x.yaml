@@ -1,0 +1,92 @@
+esphome:
+  name: cullassistant
+  friendly_name: cullAssistant 
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+api:
+ 
+ota:
+
+mdns:
+  disabled: false
+
+wifi:
+  ap: {} # This spawns an AP with the device name and mac address with no password.
+
+captive_portal:
+
+web_server:
+  port: 80
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/ssieb/esphome_components
+      ref: b922726dae9cbb0e7945446610ca7aab808559f2
+    components: [ serial_csv ]
+
+
+uart:
+ - id: uart_1
+   tx_pin: 17
+   rx_pin: 16
+   baud_rate: 9600
+   data_bits: 8
+   parity: "NONE"
+   stop_bits: 1
+
+i2c:
+  sda: 23
+  scl: 22
+  scan: true
+  id: bus_a
+    
+sensor:
+  - platform: vl53l0x
+    id: distance_sensor
+    name: "VL53L0x Distance"
+    address: 0x29
+    update_interval: 300s
+    long_range: false
+  - platform: template
+    id: level
+    name: Salt Level
+    unit_of_measurement: '%'
+    update_interval: 300s
+    lambda: |-
+      if (isnan(id(distance_sensor).state)) return 0;
+      auto r = (id(distance_sensor).state - 0.7) * (100.0 - 0.0) / (0.1 - 0.7) + 0.0;
+      if (r > 100) return 100;
+      if (r < 0) return 0;
+      return r;
+  - platform: serial_csv
+    uart_id: uart_1
+    sensors:
+      - index: 1
+        name: Gallons
+        unit_of_measurement: "gal"
+        icon: "mdi:water"
+        device_class: "water"
+        state_class: "total_increasing"
+      - index: 2
+        name: Gallons Per Minute
+        unit_of_measurement: "gal/min"
+        icon: "mdi:water"
+        device_class: "volume_flow_rate"
+        state_class: "measurement"
+        accuracy_decimals: 2
+      - index: 3
+        name: State
+      - index: 4
+        name: Gallons to Recharge
+        unit_of_measurement: "gal"
+        icon: "mdi:water"
+        device_class: "water"
+        state_class: "measurement"
