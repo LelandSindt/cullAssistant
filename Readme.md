@@ -9,7 +9,7 @@ Culligan water softeners are expensive, please consider the risks to your equipm
 
 Please consider the risk to your ESP32 when implementing this project. The TTL UART on the Culligan controller is 5v, so far my 3.3v ESP32 is working just fine. There are some references on reddit to the boards being 5v tolerant, but Adafruit makes it very clear that their boards are NOT 5v tolerant.
 
-During the sort time I have been running this I have found that some water users in my house do not register usage. So far my dishwasher does not show up, running overnight I see no usage. My theory is that it does not draw enough volume (gal/min) for the Culligan to notice. Showers, Toilets, Faucets all show water usage. I have yet to test accuracy.  
+During the short time I have been running this I have found that some water users in my house do not register usage. So far my dishwasher does not show up, running overnight I see no usage. My theory is that it does not draw enough volume (gal/min) for the Culligan to notice. Showers, Toilets, Faucets all show water usage. I have yet to test accuracy.
 
 Using this [manual](https://adms.fnal.gov/vacuum/manuals/diwater/Manuals/1b.%20GBE%20Industrial%20Communications%20(RS232%20RS485%20Modbud%20Profybus)%2001021512_C_w.pdf) I was able to determine that (some?) Culligan water softeners have a debug port that send a simple water usage message every ~60 seconds. 
 
